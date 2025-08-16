@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Check</title>
+  <style>
+    body {
+      background: black;
+      color: #00ff00;
+      font-family: monospace;
+      text-align: center;
+      margin-top: 20%;
+    }
+    input {
+      padding: 10px;
+      border: 1px solid #00ff00;
+      background: black;
+      color: #00ff00;
+      font-family: monospace;
+      width: 250px;
+    }
+    button {
+      padding: 10px;
+      margin-top: 10px;
+      background: #00ff00;
+      color: black;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>📱 Enter Phone Number</h1>
+  <input type="text" id="number" placeholder="+91XXXXXXXXXX" maxlength="13">
+  <br>
+  <button onclick="goNext()">Check</button>
+
+  <script>
+    function goNext() {
+      let num = document.getElementById("number").value;
+      if (/^\+91\d{10}$/.test(num)) {
+        localStorage.setItem("phone", num);
+        window.location.href = "result.html";
+      } else {
+        alert("❌ Please enter valid +91 number");
+      }
+    }
+  </script>
+</body>
+</html>
