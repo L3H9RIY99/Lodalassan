@@ -3,98 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DeepSeek Search Engine</title>
+  <title>Access Portal</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Courier New', monospace;
+      background-color: black;
       color: #00ff00;
+      font-family: monospace;
       text-align: center;
-      background: url('https://wallpapercave.com/wp/wp6607612.jpg') no-repeat center center fixed;
-      background-size: cover;
+      margin-top: 20%;
     }
-
-    .overlay {
-      background: rgba(0, 0, 0, 0.7);
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    .content {
-      position: relative;
-      z-index: 2;
-      padding: 50px;
-    }
-
-    h1 {
-      font-size: 36px;
-      text-shadow: 0 0 10px #00ff00;
-    }
-
-    input[type="password"] {
+    input {
       padding: 10px;
+      border: 1px solid #00ff00;
       background: black;
       color: #00ff00;
-      border: 1px solid #00ff00;
+      font-family: monospace;
     }
-
     button {
-      padding: 10px 20px;
-      background: black;
-      color: #00ff00;
-      border: 1px solid #00ff00;
+      padding: 10px;
+      background: #00ff00;
+      color: black;
+      border: none;
       cursor: pointer;
-    }
-
-    .map {
-      margin-top: 50px;
-    }
-
-    #ip {
-      margin-top: 20px;
-      font-size: 20px;
-      text-shadow: 0 0 5px #00ff00;
     }
   </style>
 </head>
 <body>
-  <div class="overlay"></div>
-  <div class="content">
-    <h1>Welcome to The Deepseek Search Engine</h1>
-    <input type="password" id="password" placeholder="Enter Password">
-    <button onclick="checkPassword()">Enter</button>
-    <p id="message"></p>
-
-    <div class="map">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg" width="600">
-    </div>
-
-    <div id="ip">Fetching your IP...</div>
-  </div>
+  <h1>🔒 Enter Password</h1>
+  <input type="password" id="pass" placeholder="Enter password">
+  <button onclick="checkPass()">Login</button>
 
   <script>
-    function checkPassword() {
-      const pass = document.getElementById("password").value;
+    function checkPass() {
+      let pass = document.getElementById("pass").value;
       if (pass === "Morish") {
-        document.getElementById("message").innerHTML = "Access Granted ✅";
+        window.location.href = "number.html";
       } else {
-        document.getElementById("message").innerHTML = "Andha hai kya lawdey ❌";
+        alert("❌ Wrong Password");
       }
     }
-
-    // Fetch user IP
-    fetch("https://api64.ipify.org?format=json")
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById("ip").innerHTML = "Your IP: " + data.ip;
-      })
-      .catch(() => {
-        document.getElementById("ip").innerHTML = "Could not fetch IP.";
-      });
   </script>
 </body>
 </html>
