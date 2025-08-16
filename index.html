@@ -2,98 +2,99 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>The Deepseek Search Engine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepSeek Search Engine</title>
   <style>
     body {
-      background-color: black;
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', monospace;
       color: #00ff00;
-      font-family: "Courier New", monospace;
       text-align: center;
+      background: url('https://wallpapercave.com/wp/wp6607612.jpg') no-repeat center center fixed;
+      background-size: cover;
     }
-    h1, h2 {
-      text-shadow: 0px 0px 10px #00ff00;
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.7);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
-    input, button {
+
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 36px;
+      text-shadow: 0 0 10px #00ff00;
+    }
+
+    input[type="password"] {
+      padding: 10px;
       background: black;
       color: #00ff00;
       border: 1px solid #00ff00;
-      padding: 10px;
-      margin: 10px;
-      font-size: 16px;
     }
-    #map {
-      width: 100%;
-      height: 400px;
-      margin-top: 20px;
-      border: 2px solid #00ff00;
+
+    button {
+      padding: 10px 20px;
+      background: black;
+      color: #00ff00;
+      border: 1px solid #00ff00;
+      cursor: pointer;
     }
-    .ip-box {
+
+    .map {
+      margin-top: 50px;
+    }
+
+    #ip {
       margin-top: 20px;
       font-size: 20px;
-      color: #00ffff;
-      text-shadow: 0px 0px 5px cyan;
+      text-shadow: 0 0 5px #00ff00;
     }
   </style>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
-
-  <!-- PAGE 1 -->
-  <div id="page1">
+  <div class="overlay"></div>
+  <div class="content">
     <h1>Welcome to The Deepseek Search Engine</h1>
-    <p>Enter Password to Continue:</p>
-    <input type="password" id="password">
+    <input type="password" id="password" placeholder="Enter Password">
     <button onclick="checkPassword()">Enter</button>
     <p id="message"></p>
-  </div>
 
-  <!-- PAGE 2 -->
-  <div id="page2" style="display:none;">
-    <h2>Access Granted ✅</h2>
-    <p>Enter the Number:</p>
-    <input type="text" id="number" placeholder="+91XXXXXXXXXX" value="+91">
-    <button>Dhoondh Le</button>
+    <div class="map">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg" width="600">
+    </div>
 
-    <!-- World Map -->
-    <div id="map"></div>
-
-    <!-- Show IP -->
-    <div class="ip-box" id="ipBox">Detecting your IP...</div>
+    <div id="ip">Fetching your IP...</div>
   </div>
 
   <script>
     function checkPassword() {
-      let pass = document.getElementById("password").value;
-      if(pass === "Morish"){
-        document.getElementById("page1").style.display = "none";
-        document.getElementById("page2").style.display = "block";
-        initMap();
-        fetchIP();
+      const pass = document.getElementById("password").value;
+      if (pass === "Morish") {
+        document.getElementById("message").innerHTML = "Access Granted ✅";
       } else {
-        document.getElementById("message").innerText = "Andha hai kya lawdey 👿";
+        document.getElementById("message").innerHTML = "Andha hai kya lawdey ❌";
       }
     }
 
-    function initMap(){
-      var map = L.map('map').setView([20, 0], 2);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: '© OpenStreetMap'
-      }).addTo(map);
-    }
-
-    function fetchIP(){
-      fetch("https://api.ipify.org?format=json")
-        .then(response => response.json())
-        .then(data => {
-          document.getElementById("ipBox").innerText = "Your IP: " + data.ip;
-        })
-        .catch(() => {
-          document.getElementById("ipBox").innerText = "IP not detected!";
-        });
-    }
+    // Fetch user IP
+    fetch("https://api64.ipify.org?format=json")
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("ip").innerHTML = "Your IP: " + data.ip;
+      })
+      .catch(() => {
+        document.getElementById("ip").innerHTML = "Could not fetch IP.";
+      });
   </script>
-
 </body>
 </html>
