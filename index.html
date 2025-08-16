@@ -13,8 +13,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: url('https://i.ibb.co/2N2R6FV/hacker-skull.jpg') no-repeat center center fixed;
-            background-size: cover;
+            /* Hacker-style gradient background */
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             font-family: monospace;
             color: #00ff00;
             text-shadow: 0 0 5px black;
@@ -51,7 +51,7 @@
         function checkPassword() {
             const password = document.getElementById('password').value;
             if (password === 'Morish') {
-                window.location.href = 'nextpage.html'; // correct password, redirect
+                window.location.href = 'number.html'; // correct password, redirect to number.html
             } else {
                 alert('Andha hai kya lawdey'); // wrong password
             }
