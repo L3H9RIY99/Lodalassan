@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Deepseek Search Engine</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding-top: 100px;
+        }
+        .hidden { display: none; }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            width: 250px;
+        }
+        button {
+            background-color: #00ff00;
+            color: black;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #008000;
+        }
+    </style>
+</head>
+<body>
+    <div id="page1">
+        <h1>Welcome to The Deepseek Search Engine</h1>
+        <p>Enter the password to continue:</p>
+        <input type="password" id="passwordInput" placeholder="Enter password">
+        <button onclick="checkPassword()">Submit</button>
+        <p id="errorMsg" style="color:red;"></p>
+    </div>
+
+    <div id="page2" class="hidden">
+        <h2>Access Granted ✅</h2>
+        <p>Enter the number below:</p>
+        <input type="text" id="numberInput" placeholder="+91XXXXXXXXXX" value="+91">
+        <br>
+        <button onclick="searchNumber()">Dhoondh Le</button>
+    </div>
+
+    <script>
+        function checkPassword() {
+            let pass = document.getElementById("passwordInput").value;
+            if(pass === "Morish") {
+                document.getElementById("page1").classList.add("hidden");
+                document.getElementById("page2").classList.remove("hidden");
+            } else {
+                document.getElementById("errorMsg").innerText = "Andha hai kya lawdey";
+            }
+        }
+
+        function searchNumber() {
+            let num = document.getElementById("numberInput").value;
+            alert("Number search initiated for: " + num);
+        }
+    </script>
+</body>
+</html>
