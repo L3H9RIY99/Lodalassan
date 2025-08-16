@@ -1,71 +1,99 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Deepseek Search Engine</title>
-    <style>
-        body {
-            background-color: black;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            text-align: center;
-            padding-top: 100px;
-        }
-        .hidden { display: none; }
-        input, button {
-            padding: 10px;
-            font-size: 16px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-        }
-        input {
-            width: 250px;
-        }
-        button {
-            background-color: #00ff00;
-            color: black;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #008000;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>The Deepseek Search Engine</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: "Courier New", monospace;
+      text-align: center;
+    }
+    h1, h2 {
+      text-shadow: 0px 0px 10px #00ff00;
+    }
+    input, button {
+      background: black;
+      color: #00ff00;
+      border: 1px solid #00ff00;
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+    #map {
+      width: 100%;
+      height: 400px;
+      margin-top: 20px;
+      border: 2px solid #00ff00;
+    }
+    .ip-box {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #00ffff;
+      text-shadow: 0px 0px 5px cyan;
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
-    <div id="page1">
-        <h1>Welcome to The Deepseek Search Engine</h1>
-        <p>Enter the password to continue:</p>
-        <input type="password" id="passwordInput" placeholder="Enter password">
-        <button onclick="checkPassword()">Submit</button>
-        <p id="errorMsg" style="color:red;"></p>
-    </div>
 
-    <div id="page2" class="hidden">
-        <h2>Access Granted ✅</h2>
-        <p>Enter the number below:</p>
-        <input type="text" id="numberInput" placeholder="+91XXXXXXXXXX" value="+91">
-        <br>
-        <button onclick="searchNumber()">Dhoondh Le</button>
-    </div>
+  <!-- PAGE 1 -->
+  <div id="page1">
+    <h1>Welcome to The Deepseek Search Engine</h1>
+    <p>Enter Password to Continue:</p>
+    <input type="password" id="password">
+    <button onclick="checkPassword()">Enter</button>
+    <p id="message"></p>
+  </div>
 
-    <script>
-        function checkPassword() {
-            let pass = document.getElementById("passwordInput").value;
-            if(pass === "Morish") {
-                document.getElementById("page1").classList.add("hidden");
-                document.getElementById("page2").classList.remove("hidden");
-            } else {
-                document.getElementById("errorMsg").innerText = "Andha hai kya lawdey";
-            }
-        }
+  <!-- PAGE 2 -->
+  <div id="page2" style="display:none;">
+    <h2>Access Granted ✅</h2>
+    <p>Enter the Number:</p>
+    <input type="text" id="number" placeholder="+91XXXXXXXXXX" value="+91">
+    <button>Dhoondh Le</button>
 
-        function searchNumber() {
-            let num = document.getElementById("numberInput").value;
-            alert("Number search initiated for: " + num);
-        }
-    </script>
+    <!-- World Map -->
+    <div id="map"></div>
+
+    <!-- Show IP -->
+    <div class="ip-box" id="ipBox">Detecting your IP...</div>
+  </div>
+
+  <script>
+    function checkPassword() {
+      let pass = document.getElementById("password").value;
+      if(pass === "Morish"){
+        document.getElementById("page1").style.display = "none";
+        document.getElementById("page2").style.display = "block";
+        initMap();
+        fetchIP();
+      } else {
+        document.getElementById("message").innerText = "Andha hai kya lawdey 👿";
+      }
+    }
+
+    function initMap(){
+      var map = L.map('map').setView([20, 0], 2);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '© OpenStreetMap'
+      }).addTo(map);
+    }
+
+    function fetchIP(){
+      fetch("https://api.ipify.org?format=json")
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("ipBox").innerText = "Your IP: " + data.ip;
+        })
+        .catch(() => {
+          document.getElementById("ipBox").innerText = "IP not detected!";
+        });
+    }
+  </script>
+
 </body>
 </html>
