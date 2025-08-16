@@ -1,47 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Access Portal</title>
-  <style>
-    body {
-      background-color: black;
-      color: #00ff00;
-      font-family: monospace;
-      text-align: center;
-      margin-top: 20%;
-    }
-    input {
-      padding: 10px;
-      border: 1px solid #00ff00;
-      background: black;
-      color: #00ff00;
-      font-family: monospace;
-    }
-    button {
-      padding: 10px;
-      background: #00ff00;
-      color: black;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawdasurrrr Access</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: url('https://i.ibb.co/2N2R6FV/hacker-skull.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: monospace;
+            color: #00ff00;
+            text-shadow: 0 0 5px black;
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #00ff00;
+            background: rgba(0,0,0,0.7);
+            color: #00ff00;
+        }
+        button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            font-size: 16px;
+            border: 2px solid #00ff00;
+            background: rgba(0,0,0,0.7);
+            color: #00ff00;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <h1>🔒 Enter Password</h1>
-  <input type="password" id="pass" placeholder="Enter password">
-  <button onclick="checkPass()">Login</button>
+    <h1>Welcome To The World of Lawdasurrrr</h1>
+    <div>
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="checkPassword()">Enter</button>
+    </div>
 
-  <script>
-    function checkPass() {
-      let pass = document.getElementById("pass").value;
-      if (pass === "Morish") {
-        window.location.href = "number.html";
-      } else {
-        alert("❌ Wrong Password");
-      }
-    }
-  </script>
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            if (password === 'Morish') {
+                window.location.href = 'nextpage.html'; // correct password, redirect
+            } else {
+                alert('Andha hai kya lawdey'); // wrong password
+            }
+        }
+    </script>
 </body>
 </html>
