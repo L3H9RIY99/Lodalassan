@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSINT Results</title>
+  <style>
+    body {
+      background: black;
+      color: #00ff00;
+      font-family: monospace;
+      padding: 20px;
+    }
+    pre {
+      background: #111;
+      padding: 10px;
+      border: 1px solid #00ff00;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔎 OSINT Results</h1>
+  <p id="phone"></p>
+  <h2>📌 Checking breaches (HIBP)</h2>
+  <pre id="hibp">Loading...</pre>
+  <h2>🌍 Device IP Info</h2>
+  <pre id="ipinfo">Loading...</pre>
+
+  <script>
+    const phone = localStorage.getItem("phone");
+    document.getElementById("phone").innerText = "Number Entered: " + phone;
+
+    // ✅ HIBP (just demo since API key needed)
+    document.getElementById("hibp").innerText = 
+      "HaveIBeenPwned requires API key.\n\nDemo: Phone may have appeared in leaks.\nVisit: https://haveibeenpwned.com/";
+
+    // ✅ IPInfo (free demo)
+    fetch("https://ipinfo.io/json?token=YOUR_TOKEN_HERE")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("ipinfo").innerText = JSON.stringify(data, null, 2);
+      })
+      .catch(() => {
+        document.getElementById("ipinfo").innerText = "Failed to fetch IP Info.";
+      });
+  </script>
+</body>
+</html>
