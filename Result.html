@@ -1,49 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OSINT Results</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deepseek Terminal</title>
+<style>
     body {
-      background: black;
-      color: #00ff00;
-      font-family: monospace;
-      padding: 20px;
+        margin: 0;
+        padding: 0;
+        font-family: 'Courier New', Courier, monospace;
+        background: #0f0f0f;
+        color: #00ff00;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        overflow-x: hidden;
     }
-    pre {
-      background: #111;
-      padding: 10px;
-      border: 1px solid #00ff00;
-      overflow-x: auto;
+
+    .container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 20px;
+        overflow-y: auto;
+        height: 100%;
     }
-  </style>
+
+    .line {
+        margin-bottom: 5px;
+    }
+
+    .highlight {
+        color: #ff5555;
+    }
+
+    footer {
+        text-align: center;
+        padding: 10px 0;
+        background-color: #000;
+        font-size: 0.9rem;
+        color: #00ff00;
+    }
+</style>
 </head>
 <body>
-  <h1>🔎 OSINT Results</h1>
-  <p id="phone"></p>
-  <h2>📌 Checking breaches (HIBP)</h2>
-  <pre id="hibp">Loading...</pre>
-  <h2>🌍 Device IP Info</h2>
-  <pre id="ipinfo">Loading...</pre>
+<div class="container" id="terminal">
+    <div class="line">Initializing Deepseek OS...</div>
+</div>
 
-  <script>
-    const phone = localStorage.getItem("phone");
-    document.getElementById("phone").innerText = "Number Entered: " + phone;
+<footer>©Moriish 2025, All Rights reserved</footer>
 
-    // ✅ HIBP (just demo since API key needed)
-    document.getElementById("hibp").innerText = 
-      "HaveIBeenPwned requires API key.\n\nDemo: Phone may have appeared in leaks.\nVisit: https://haveibeenpwned.com/";
+<script>
+const terminal = document.getElementById('terminal');
 
-    // ✅ IPInfo (free demo)
-    fetch("https://ipinfo.io/json?token=YOUR_TOKEN_HERE")
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("ipinfo").innerText = JSON.stringify(data, null, 2);
-      })
-      .catch(() => {
-        document.getElementById("ipinfo").innerText = "Failed to fetch IP Info.";
-      });
-  </script>
+// Fake hacker logs
+const logs = [
+    "Loading modules...",
+    "Connecting to remote server...",
+    "Installing TurboX Protocol...",
+    "Decrypting payload...",
+    "Bypassing firewall...",
+    "Scanning for open ports...",
+    "Initializing database engine...",
+    "Loading user shoe database...",
+    "Fetching analytics modules...",
+    "Finalizing configuration..."
+];
+
+let i = 0;
+
+function typeLog() {
+    if(i < logs.length){
+        const line = document.createElement('div');
+        line.className = 'line';
+        line.innerText = logs[i];
+        terminal.appendChild(line);
+        terminal.scrollTop = terminal.scrollHeight;
+        i++;
+        setTimeout(typeLog, Math.random()*800 + 300); // random typing effect
+    } else {
+        startCountdown();
+    }
+}
+
+typeLog();
+
+// Random countdown between 14 to 24 hours
+const minHours = 14;
+const maxHours = 24;
+let totalSeconds;
+
+function startCountdown() {
+    const randomHours = Math.floor(Math.random() * (maxHours - minHours + 1)) + minHours;
+    totalSeconds = randomHours * 60 * 60; // total seconds
+
+    const dbLine = document.createElement('div');
+    dbLine.className = 'line highlight';
+    dbLine.innerHTML = 'Database loading... Remaining Time: <span id="countdown"></span>';
+    terminal.appendChild(dbLine);
+
+    function updateTimer() {
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        document.getElementById('countdown').innerText =
+            `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+
+        if(totalSeconds > 0) totalSeconds--;
+    }
+
+    updateTimer(); // initial display
+    setInterval(updateTimer, 1000);
+}
+</script>
 </body>
 </html>
